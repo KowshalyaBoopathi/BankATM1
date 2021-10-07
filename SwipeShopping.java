@@ -7,7 +7,7 @@ public class SwipeShopping extends Validation {
 	}
 	
 	double balance(int amount, double charges, Account acc) {
-		balance=acc.getBalance()-amount+charges;
+		double balance=acc.getBalance()-amount+charges;
 		return balance;
 	}
 	

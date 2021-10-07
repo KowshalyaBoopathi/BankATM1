@@ -3,15 +3,13 @@ package com.bank;
 import java.util.*;
 
 public abstract class Validation {
-	
-	double balance;
-	
+		
 	abstract double charges(int amount);
 	
 	abstract double balance(int amount, double charges, Account account);
 	
 	double deposit(int amount, Account acc) {
-		balance=amount+acc.getBalance();
+		double balance=amount+acc.getBalance();
 		acc.setBalance(balance);
 		  return balance;
 	}
@@ -47,8 +45,9 @@ public abstract class Validation {
 		else
 			return false;
 	}	
+	
 	boolean isValidTransaction(int amount,Account acc) {
-		balance = acc.getBalance() - amount;
+		double balance = acc.getBalance() - amount;
 		if(balance >= acc.getMINIMUM_BALANCE()) {
 			return true;
 		}

@@ -6,7 +6,7 @@ public class ATMCard {
 	
 	public static void main(String[] args) {
 		
-		Deposit acc;
+		Validation acc;
 		Account account;
 
 		Scanner sc = new Scanner(System.in);
@@ -59,6 +59,7 @@ public class ATMCard {
 			}
 			else
 				System.out.println("Enter valid account number");
+			
 			break;
 			
 		case 3:
@@ -75,17 +76,21 @@ public class ATMCard {
 				System.out.println("Enter amount to withdraw");
 				int amount = sc.nextInt();
 				
-				if(cash.dispenseCash(amount)) {
+				if(cash.isValidAmount(amount)) {
 					double charges=cash.charges(amount);
-					double balance=cash.balance(amount,account);
+					double balance=cash.balance(amount,charges,account);
 					
 					if(cash.isValidTransaction(balance,account)) {
+						account.setBalance(balance);
 						System.out.println("Charges USD "+charges);
 						System.out.println("Balance USD "+balance);
 					}
 					else
 						System.out.println("Insufficient minimum balance");
 				}
+				else
+					System.out.println("Please correct the amount of value. It should be multiple of USD 5"
+							+ "");					
 			}
 			else
 				System.out.println("Enter valid card number");
@@ -107,9 +112,10 @@ public class ATMCard {
 				int amount = sc.nextInt();
 				
 				double charges=shop.charges(amount);
-				double balance=shop.balance(amount,account);
+				double balance=shop.balance(amount,charges,account);
 					
-				if(shop.isValidTransaction(balance,account)) {
+				if(shop.isValidTransaction(amount,account)) {
+					account.setBalance(balance);
 					System.out.println("Charges USD "+charges);
 					System.out.println("Balance USD "+balance);
 				}

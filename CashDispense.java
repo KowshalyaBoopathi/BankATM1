@@ -1,33 +1,25 @@
 package com.bank;
 
-public class CashDispense extends Deposit {
-
-	double charges;
-	double balance;
+public class CashDispense extends Validation {
 	
-	boolean dispenseCash(int amount) {
+	boolean isValidAmount(int amount) {
 		if(amount%5==0)
 			return true;
 		else
-			System.out.println("Please correct the amount of value. It should be multiple of USD 5"
-					+ "");
-		return false;
+			return false;
 	}
 
 	@Override
 	double charges(int amount) {
-		if(amount > 100) {
-			charges=(0.04*amount);
-			return charges;
-		}
-		else {
-			charges=(0.02*amount);
-			return charges;
-		}
+		if(amount > 100) 
+			return (0.04*amount);
+			
+		else 
+			return (0.02*amount);
 	}
 
 	@Override
-	double balance(int amount,Account acc) {
+	double balance(int amount, double charges, Account acc) {
 		balance=acc.getBalance()-amount-charges;
 		return balance;
 		}

@@ -1,16 +1,12 @@
 package com.bank;
 
-public class SwipeShopping extends Deposit {
-	
-	double charges;
-	double balance;
+public class SwipeShopping extends Validation {
 	
 	double charges(int amount) {
-			charges=(0.01*amount);
-			return charges;
+		return (0.01*amount);
 	}
 	
-	double balance(int amount, Account acc) {
+	double balance(int amount, double charges, Account acc) {
 		balance=acc.getBalance()-amount+charges;
 		return balance;
 	}
